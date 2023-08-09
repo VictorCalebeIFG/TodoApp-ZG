@@ -12,6 +12,14 @@ public class Main {
         MyCanvas.adicionarTask(myTask2);
         MyCanvas.adicionarTask(myTask3);
         
+        //MyCanvas.mostrarTask();
+        System.out.println("---");
+
+        MyCanvas.removerTask(20);
+
+        System.out.println("---");
+
+        //MyCanvas.mostrarTask();
         MyCanvas.mostrarTask();
     }
 }

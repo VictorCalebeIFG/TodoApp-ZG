@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 
 public class Task {
     public String nome;
-    public String id;
+    public int id;
     public String descricao;
     public LocalDateTime dataLimite;
     public String estado;
