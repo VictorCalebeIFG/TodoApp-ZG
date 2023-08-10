@@ -143,11 +143,17 @@ public class Canvas {
 
             switch (comando) {
                 case "1":
-                    mostrarPrioridade(5);
-                    mostrarPrioridade(4);
-                    mostrarPrioridade(3);
-                    mostrarPrioridade(2);
-                    mostrarPrioridade(1);
+                    if (this.taskList.size() == 0){
+                        System.out.println("Sua lista está vazia digite {2} para adicionar algo");
+                    }
+                    else{
+                        mostrarPrioridade(5);
+                        mostrarPrioridade(4);
+                        mostrarPrioridade(3);
+                        mostrarPrioridade(2);
+                        mostrarPrioridade(1);
+                    }
+                    
                     break;
                 case "2":
                     terminalAdicionarTask();
