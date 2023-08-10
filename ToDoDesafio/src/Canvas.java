@@ -164,7 +164,7 @@ public class Canvas {
                     this.removerTask(remove);
                     break;
                 case "4":
-                    System.out.println("Digite qual task você quer mudar o estado.");
+                    System.out.println("Digite qual task (ID) você quer mudar o estado.");
                     int idEstado = this.scanner2.nextInt();
                     System.out.println("Digite o novo estado.");
                     String estado = this.scanner.nextLine();
