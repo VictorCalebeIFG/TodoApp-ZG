@@ -5,7 +5,7 @@ Programa escrito em **Java** para exercitar conhecimentos obtidos durante o Acel
 ### Como usar:
 
 - Entre na pasta ToDoDesafio/src
-- Compile todos os arquivos .java [entre na pasta usando a linha de comando e use javac ``*.java`` para compliar tudo de uma vez] 
+- Compile todos os arquivos .java [``*.java`` para compliar tudo de uma vez] 
 - Rodo o arquivo Main.java
 
 ### Como funciona?
