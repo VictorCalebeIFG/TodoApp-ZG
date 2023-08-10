@@ -4,7 +4,11 @@ public class Main {
     public static void main(String[] args) {
         Canvas MyCanvas = new Canvas();
         
-        /* 
+        /*
+
+        // Task de teste, fique a vontade para "Descomentar", pois não irá causar nenhum problema.
+        // Use caso queira começar com algumas task no começo do programa.
+
         Task myTask1 = new Task("Comer todas as verduras", "Odeio comer verduras, mas tenho que fazer um esforço", LocalDateTime.now(), "todo",3,"saude");
         Task myTask2 = new Task("Fazer exercícios", "Meu médico falou que preciso fazer exercicios :/", LocalDateTime.now(), "todo",3,"saude");
         Task myTask3 = new Task("Terminar o TCC", "Preciso terminar o meu TCC o quanto antes, não aguento mais >:(", LocalDateTime.now(), "doing",5,"faculdade");
@@ -17,6 +21,7 @@ public class Main {
 
         */
         
+        // Inicia o Loop do Canvas (interface de usuário)
         MyCanvas.terminalComandos();
 
     }
