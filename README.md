@@ -10,7 +10,7 @@ Programa escrito em **Java** para exercitar conhecimentos obtidos durante o Acel
 
 ### Como funciona?
 
-O programa possui duas classes principais: Canvas e Task. O **Canvas** é onde ficará todas as task, ele é responsável pela interface de usuário e pela manipulação das **tasks**, é no **Canvas** que definido qual é o **ID** de cada task. Além disso, temos a classe**Task**, ela é responsável por amarmazenar os atributos da task (nome da task, id , descrição, estado, categoria e  prioridade).
+O programa possui duas classes principais: Canvas e Task, o **Canvas** é onde ficará todas as task, ele é responsável pela interface de usuário e pela manipulação das **tasks**, é no **Canvas** que definido qual é o **ID** de cada task. Além disso, temos a classe**Task**, ela é responsável por amarmazenar os atributos da task (nome da task, id , descrição, estado, categoria e  prioridade).
 
 Em resumo, o **Canvas** nada mais é do que uma lista de Task. Dentro do canvas temos um atributo **taskList**, é nela que estão armazenadas todas as **Task**.
 
