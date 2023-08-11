@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Task {
+public class Task implements Serializable{
     public String           nome;
     public int              id;
     public String           descricao;
@@ -8,6 +9,8 @@ public class Task {
     public String           estado;
     public int              prioridade;
     public String           categoria;
+
+    public boolean          alarme = true;
 
     public void setNome(String nome) {
         this.nome = nome;
