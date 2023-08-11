@@ -28,11 +28,11 @@ public class Canvas implements Serializable{
         Iterator<Task> iterator = this.taskList.iterator();
         
         while (iterator.hasNext()) {
-        Task task = iterator.next();
-        if (task.id == idTask) {
-            iterator.remove(); // Remove o elemento atual de forma segura
+            Task task = iterator.next();
+            if (task.id == idTask) {
+                iterator.remove(); // Remove o elemento atual de forma segura
+            }
         }
-    }
     }
 
     /**

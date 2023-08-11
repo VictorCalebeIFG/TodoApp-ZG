@@ -14,7 +14,9 @@ public class TerminalUI {
     int prioridade = 0;
     LocalDateTime dia = LocalDateTime.now();
     
-
+    /**
+     * Inicia a interface de usuário onde será feita as adições de uma task
+     */
     public void adicionarTaksUI(){
         
         System.out.println("\nDigite o nome da Task:");
@@ -37,13 +39,16 @@ public class TerminalUI {
         this.dia = LocalDateTime.parse(dataUsuario, dateTimeFormatter);                     //Cria um objeto data.
     }
 
+    /**
+     * Inicia a interface de usuário pela qual será feita a interação com as tasks.
+     * @param canvas
+     */
     public void terminalComandosUI(Canvas canvas){
         System.out.println("O que deseja Fazer ?\n\n{1}-\t\tMostrar Tasks\t\t\t{2}-\t\tAdicionar Task\n{3}-\t\tRemover Task\t\t\t{4}-\t\tMudar Estado \n{12}-\t\tFiltrar por pioridade\t\t{13}-\t\tFiltrar por categoria\n{save}-\t\tSalvar tasks\t\t\t{load}-\t\tCarregar arquivo.\n{14}-\t\tFiltrar por status\t\t{77}-\t\tSair\n");
         boolean loop = true;
 
         while(loop){
 
-        
             String comando = this.scanner1.nextLine();
 
             switch (comando) {
