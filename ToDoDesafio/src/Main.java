@@ -19,11 +19,7 @@ public class Main {
         
         alarmeThread.start();
 
-        //Task task2 = new Task("null2", "null", LocalDateTime.now(), "null", 0, "null");
-        //MyCanvas.adicionarTask(task2);
-
         terminalInterfaceThread.start();
 
-        //alarme.iniciaAlarme(MyCanvas);
     }
 }

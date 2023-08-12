@@ -15,32 +15,45 @@ public class TerminalUI {
     LocalDateTime dia = LocalDateTime.now();
 
     boolean alarme = false;
+
+    boolean dataVerificada = false;
     
     /**
      * Inicia a interface de usuário onde será feita as adições de uma task
      */
     public void adicionarTaksUI(){
+
+        this.dataVerificada = false;
         
-        System.out.println("\nDigite o nome da Task:");
+        System.out.print("\nDigite o nome da Task: ");
         this.nomeTask = this.scanner2.nextLine();
 
-        System.out.println("Digite a categoria da task:");
+        System.out.print("Digite a categoria da task: ");
         this.categoria = this.scanner2.nextLine();
 
         System.out.println("Digite a Descricao:");
         this.descricao = this.scanner2.nextLine();
         
         while(prioridade <1 || prioridade>5){
-            System.out.println("Digite a prioridade da task (deve estar entre 1 e 5):");
+            System.out.print("Digite a prioridade da task (deve estar entre 1 e 5): ");
             prioridade = this.scanner1.nextInt();
         }
         
-        System.out.print("Data Limite para entrega (formato yyyy-MM-dd HH:mm:ss): ");
-        String dataUsuario = scanner2.nextLine();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");   //Modifica o formado da data.
-        this.dia = LocalDateTime.parse(dataUsuario, dateTimeFormatter);                     //Cria um objeto data.
+        while(!dataVerificada){
+            try {
+            System.out.print("Data Limite para entrega (formato yyyy-MM-dd HH:mm:ss): ");
+            String dataUsuario = scanner2.nextLine();
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");   //Modifica o formado da data.
+            this.dia = LocalDateTime.parse(dataUsuario, dateTimeFormatter);                                     //Cria um objeto data.    
+            this.dataVerificada = true;
+        } catch (Exception e) {
+            System.out.println("Voce digitou a data errada, tente novamente.");
+        }
+        }
+        
+        
 
-        System.out.print("Gostaria de acionar o alarme ? (sim/nao)");
+        System.out.print("Gostaria de acionar o alarme ? (sim/nao): ");
         String querAlarme = scanner2.nextLine();
         this.alarme = (querAlarme.equals("sim")) ? true : false;
 
