@@ -13,10 +13,19 @@ Programa escrito em **Java** para exercitar conhecimentos obtidos durante o Acel
 
 ### Como funciona?
 
-O programa possui duas classes principais: Canvas e Task, o **Canvas** é onde ficará todas as task, ele é responsável pela interface de usuário e pela manipulação das **tasks**, é no **Canvas** que definido qual é o **ID** de cada task. Além disso, temos a classe**Task**, ela é responsável por amarmazenar os atributos da task (nome da task, id , descrição, estado, categoria e  prioridade).
+O programa é formado por estes elementos:
+**Canvas**: É onde estão guardadas todas as tasks dentro de um atrbiuto chamado _task list_. Essa classe é a ponte entre a interface de usuário (usando o terminal) e a classe _TerminalUI_.
 
-Em resumo, o **Canvas** nada mais é do que uma lista de Task. Dentro do canvas temos um atributo **taskList**, é nela que estão armazenadas todas as **Task**.
+**Taks**: Essa é a classe onde estão armazenados as informações das tarefa do usuário. Possui atributos como _nomeTask_,_prioridade_,_categoria_ etc ...
+
+**TerminalUI**: É nessa classe que é feita a interação com usuário. É nela que está alocado as perguntas que serão feitas ao usuário para preencher as _tasks_, é nela também que está o menu de ecolha.
+
+**Alarme**: É nessa classe que está o loop que verifica se a Task está com o alarme abilitado e se o tempo da _data limite_ já passou.
+
+**SaveSystem**: É a classe responsável por salvar de forma **local** o objeto Canvas (serialização). O save ficara no arquivo chamado _canvas.save_.
+
 
 ### Amostra de como ficou:
 
-<img width="416" alt="image" src="https://github.com/VictorCalebeIFG/TodoApp-ZG-Desafio/assets/84258178/b7e61311-563a-4a04-a0b3-5fe31f649f52">
+<img width="355" alt="image" src="https://github.com/VictorCalebeIFG/TodoApp-ZG-Desafio/assets/84258178/426c4a59-0588-47b8-b561-e739adb2632b">
+
