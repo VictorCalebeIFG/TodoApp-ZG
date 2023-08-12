@@ -13,7 +13,7 @@ Programa escrito em **Java** para exercitar conhecimentos obtidos durante o Acel
 
 ### Como funciona?
 
-#### O programa é formado por estes elementos:
+### O programa é formado por estes elementos:
 
 
 **Canvas**: É onde estão guardadas todas as tasks dentro de um atrbiuto chamado _task list_. Essa classe é a ponte entre a interface de usuário (usando o terminal) e a classe _TerminalUI_.
