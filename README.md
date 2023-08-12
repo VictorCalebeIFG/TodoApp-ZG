@@ -15,6 +15,7 @@ Programa escrito em **Java** para exercitar conhecimentos obtidos durante o Acel
 
 O programa é formado por estes elementos:
 
+
 **Canvas**: É onde estão guardadas todas as tasks dentro de um atrbiuto chamado _task list_. Essa classe é a ponte entre a interface de usuário (usando o terminal) e a classe _TerminalUI_.
 
 **Taks**: Essa é a classe onde estão armazenados as informações das tarefa do usuário. Possui atributos como _nomeTask_,_prioridade_,_categoria_ etc ...
