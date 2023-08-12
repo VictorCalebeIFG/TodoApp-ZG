@@ -119,6 +119,7 @@ public class Canvas implements Serializable{
                                 terminalUI.getPrioridade(),
                                 terminalUI.getCategoria());
 
+        novaTask.alarme = terminalUI.alarme;
 
         this.adicionarTask(novaTask);
 

@@ -13,6 +13,8 @@ public class TerminalUI {
     
     int prioridade = 0;
     LocalDateTime dia = LocalDateTime.now();
+
+    boolean alarme = false;
     
     /**
      * Inicia a interface de usuário onde será feita as adições de uma task
@@ -37,6 +39,11 @@ public class TerminalUI {
         String dataUsuario = scanner2.nextLine();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");   //Modifica o formado da data.
         this.dia = LocalDateTime.parse(dataUsuario, dateTimeFormatter);                     //Cria um objeto data.
+
+        System.out.print("Gostaria de acionar o alarme ? (sim/nao)");
+        String querAlarme = scanner2.nextLine();
+        this.alarme = (querAlarme.equals("sim")) ? true : false;
+
     }
 
     /**
@@ -127,6 +134,10 @@ public class TerminalUI {
     }
     public int getPrioridade() {
         return prioridade;
+    }
+
+    public boolean getAlarme() {
+        return this.alarme;
     }
 
 }
