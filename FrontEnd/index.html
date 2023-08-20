@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do app - AceleraZG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="task-insertion">
+        
+        <div class="no-desc-container">
+
+            <div class="nome-task">
+                <label for="nome-task">Digite o nome da task:</label><br>
+                <input type="text" name="nome-taks" id="nome-task">
+            </div>
+    
+            <div class="data-task">
+                <label for="data-task">Data limite</label><br>
+                <input type="datetime-local" name="data-task" id="data-task">
+            </div>
+    
+            <div class="estado-task">
+                <label for="estado">Estado:</label><br>
+                <select name="estado-task" id="estado-task">
+                    <option value="todo">To Do</option>
+                    <option value="doing">Doing</option>
+                    <option value="done">Done</option>
+                </select>
+            </div>
+            
+            <div class="prioridade-task">
+                <label for="prioridade-task">Prioridade:</label><br>
+                <select name="prioridade-task" id="prioridade-task">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+    
+            <div class="categoria-task">
+                <label for="categoria-task">Categoria:</label><br>
+                <select name="categoria-task" id="categoria-task">
+                    <option value="trabalho">trabalho</option>
+                    <option value="saude">saude</option>
+                    <option value="familia">familia</option>
+                    <option value="casa">casa</option>
+                    <option value="compras">compras</option>
+                    <option value="educacao">educacao</option>
+                </select>
+            </div>
+
+
+        </div>
+        
+
+        <div class="description-task">
+            <label for="description-task">Desrcrição:</label><br>
+            <div class="description-button">
+                <textarea name="description-task" id="description-task" cols="30" rows="2"></textarea>
+                <button type="button" id="add-task" >ADD</button>
+                <button type="button" id="edit-task" >EDIT</button>
+                <button type="button" id="delete-task" >DEL</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="task-container">
+
+        <div class="todo-container">
+
+            <div class="title-task-content">
+                To do
+            </div>
+
+            <div class="content todo">
+
+                <div class="task todo">
+                    <label for="nome"><span>Nome:</span> Fazer front End</label>
+                    <label for="estado"><span>Estado:</span> Todo</label>
+                    <label for="prioridade"><span>Prioridade:</span> 5</label>
+                    <label for="categoria"><span>Categoria:</span> trabalho</label>
+                    <label for="data"><span>Data:</span> 20/08/2023 10:56</label><br>
+                    <label for="descricao"><span>Descricao: </span>Preciso fazer o front do todo app</label>
+                </div>
+    
+                <div class="task todo">
+                    <label for="nome"><span>Nome:</span> Lavar Pratos</label>
+                    <label for="estado"><span>Estado:</span> Todo</label>
+                    <label for="prioridade"><span>Prioridade:</span> 5</label>
+                    <label for="categoria"><span>Categoria:</span> trabalho</label>
+                    <label for="data"><span>Data:</span> 20/08/2023 10:56</label><br>
+                    <label for="descricao"><span>Descricao: </span>Preciso lavar os pratos</label>
+                </div>
+
+            </div>
+            
+        </div>
+
+        <div class="doing-container">
+
+            <div class="title-task-content">
+                Doing
+            </div>
+
+            <div class="content doing">
+
+                <div class="task doing">
+                    <label for="nome"><span>Nome:</span> Fazer front End</label>
+                    <label for="estado"><span>Estado:</span> Todo</label>
+                    <label for="prioridade"><span>Prioridade:</span> 5</label>
+                    <label for="categoria"><span>Categoria:</span> trabalho</label>
+                    <label for="data"><span>Data:</span> 20/08/2023 10:56</label><br>
+                    <label for="descricao"><span>Descricao: </span>Preciso fazer o front do todo app</label>
+                </div>
+    
+                <div class="task doing">
+                    <label for="nome"><span>Nome:</span> Lavar Pratos</label>
+                    <label for="estado"><span>Estado:</span> Todo</label>
+                    <label for="prioridade"><span>Prioridade:</span> 5</label>
+                    <label for="categoria"><span>Categoria:</span> trabalho</label>
+                    <label for="data"><span>Data:</span> 20/08/2023 10:56</label><br>
+                    <label for="descricao"><span>Descricao: </span>Preciso lavar os pratos</label>
+                </div>
+
+            </div>
+            
+        </div>
+
+        <div class="done-container">
+
+            <div class="title-task-content">
+                Done
+            </div>
+
+            <div class="content done">
+
+                <div class="task done">
+                    <label for="nome"><span>Nome:</span> Fazer front End</label>
+                    <label for="estado"><span>Estado:</span> Todo</label>
+                    <label for="prioridade"><span>Prioridade:</span> 5</label>
+                    <label for="categoria"><span>Categoria:</span> trabalho</label>
+                    <label for="data"><span>Data:</span> 20/08/2023 10:56</label><br>
+                    <label for="descricao"><span>Descricao: </span>Preciso fazer o front do todo app</label>
+                </div>
+    
+                <div class="task done">
+                    <label for="nome"><span>Nome:</span> Lavar Pratos</label>
+                    <label for="estado"><span>Estado:</span> Todo</label>
+                    <label for="prioridade"><span>Prioridade:</span> 5</label>
+                    <label for="categoria"><span>Categoria:</span> trabalho</label>
+                    <label for="data"><span>Data:</span> 20/08/2023 10:56</label><br>
+                    <label for="descricao"><span>Descricao: </span>Preciso lavar os pratos</label>
+                </div>
+
+            </div>
+            
+        </div>
+        
+
+    </div>
+    
+    <script src="index.js"></script>
+</body>
+</html>

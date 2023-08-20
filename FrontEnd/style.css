@@ -1,0 +1,59 @@
+
+.task-insertion{
+    border: 2px solid black;
+    width: 100%;
+    margin: 10px auto 10px;
+}
+
+.no-desc-container{
+    display: flex;
+    justify-content: center;
+}
+
+.no-desc-container>*{
+    margin: 10px 10px 10px 10px;
+}
+
+.description-task label{
+    margin-left: 10px;
+}
+.description-button{
+    display: flex;
+    justify-content: center;
+}
+
+.description-button>*{
+    margin: 10px;
+}
+
+.description-task textarea{
+    width: 100%;
+}
+
+.task-container>*{
+    margin: 10px 5px 10px 5px;
+    padding: 5px;
+}
+
+.todo-container , .done-container, .doing-container{
+    display: flex;
+}
+
+
+.title-task-content {
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.task >*{
+    padding-left: 15px;
+}
+
+.content>*{    
+    margin: 20px;
+}
+
+
+
