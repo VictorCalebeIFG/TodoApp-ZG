@@ -7,18 +7,28 @@ let prioridade_task         = document.getElementById('prioridade-task');
 let categoria_task          = document.getElementById('categoria-task');
 let description_task        = document.getElementById('description-task');
 
-let todo_task_container     = document.getElementById("content-todo");
-let doing_task_container    = document.getElementsByClassName('doing-task-container');
-let done_task_container     = document.getElementsByClassName('done-task-container');
-
-
 let todoList =  [];
 let doingList = [];
 let doneList =  [];
 
+const taskListDict = {
+    "todo":todoList,
+    "doing":doingList,
+    "done":doneList
+}
+
 let currentID;
 
+const taskContainerDivs = {
+    "todo":document.getElementById("content-todo"),
+    "doing":document.getElementById("content-doing"),
+    "done":document.getElementById("content-done")
+}
 
+
+/*
+*ON CLICK DO BOTÃO "ADD" - É AQUI QUE SERÁ ADICIONADO A TASK NA RESPECTIVA LISTA (DE ACORDO COM STATUS)
+*/
 document.getElementById("add-task").onclick = ()=>{
     addTaskToList(  nome_task.value,
                     description_task.value,
@@ -27,6 +37,10 @@ document.getElementById("add-task").onclick = ()=>{
                     prioridade_task.value,
                     categoria_task.value);
 }
+
+/**
+ * FUNÇÃO ADD TASK - RECEBE OS PARAMETROS DA CLASSE E CRIA UMA INSTÂNCIA DA TASK E COLOCA NA RESPECTIVA STATUSLIST.
+ */
 
 function addTaskToList( nome,
                         description,
@@ -44,6 +58,9 @@ function addTaskToList( nome,
 
   }
 
+/**
+ * VERIFICAR QUAL DAS 3 STATUSLIST DEVE SER COLOCADO A TASK.
+ */
 
 function checkStatusList(task){
     switch (status_task.value) {
@@ -54,39 +71,88 @@ function checkStatusList(task){
             doingList.push(task);
             break;
         default:
-            doingList.push(task);
+            doneList.push(task);
       }  
 }
 
-function addTasksToContainer(){
+/**
+ * RETORNA ULTIMA TASK DA RESPECTIVA STATUSLIST.
+ */
 
-    const taskContainer  = document.createElement("div");
-    taskContainer.classList.add("task");
-
-    const task = todoList[todoList.length -1];
-    
-    setVariablesInDiv(taskContainer,task);
-
-    taskContainer.innerHTML = createTaskText(task);
-
-    todo_task_container.appendChild(taskContainer);
-
-    linkToCopy();
+function getLastTaskOnListStatus(){
+    switch (status_task.value) {
+        case "todo":
+            return todoList[todoList.length -1];
+        case "doing":
+            return doingList[doingList.length -1];
+        default:
+            return doneList[doneList.length -1];
+      }  
 
 }
 
+/**
+ * RETORNA A LISTA DA RESPECTIVA STATUSLIST.
+ */
+
+function getListOnStatus(){
+
+    switch (status_task.value) {
+        case "todo":
+            return todoList;
+        case "doing":
+            return doingList;
+        default:
+            return doneList;
+      }  
+
+}
+
+/**
+ * ADICIONA OS ELEMENTOS HTML PARA CADA TASK
+ */
+function addTasksToContainer(){
+
+    const taskContent  = document.createElement("div");
+    taskContent.classList.add("task");
+
+    const button            = document.createElement('button');
+    button.textContent      = "Selecionar"
+
+    const task = getLastTaskOnListStatus();
+    taskContent.innerHTML = createTaskText(task);
+    
+    setVariablesInDiv(taskContent,task);
+
+    const div = taskContainerDivs[status_task.value];
+
+    div.appendChild(taskContent);
+    taskContent.appendChild(button)
+
+    linkToSelectionButton();
+
+}
+
+/**
+ * RETRONA O TEXTO PARA O INNERHTML DA DIV DA TASK.
+ */
 function createTaskText(task){
 
     const text = `
     ID:         ${task.id}          <br>
     Nome:       ${task.nome}        <br>Data:       ${task.getFormatedDate()} <br>
     Status:     ${task.status}      <br>Prioridade: ${task.prioridade} <br>
-    categoria:  ${task.categoria}   <br>Descrição:  ${task.description}
+    categoria:  ${task.categoria}   <br>Descrição:  ${task.description} <br>
     `
 
     return text
 }
 
+/**
+ * ADICIONA OS MESMOS ATRIBUTOS DA TASK AOS ATRIBUTOS DA DIV.
+ * (ISSO É FEITO PARA QUE EU POSSA OBTER OS DADOS DA TASK
+ * AO CLICAR NO BOTÃO "SELECIONAR")
+ */
 function setVariablesInDiv(div,task){
 
     div.setAttribute("id",task.id);
@@ -99,14 +165,19 @@ function setVariablesInDiv(div,task){
 
 }
 
-function linkToCopy(){
+/**
+ * FUNÇÃO RESPONSÁVEL PELA LÓGICA DE OBTER OS DADOS DA TASK E PASSAR PARA O FORMS
+ * PARA A DEKETAR A TASK OU EDITAR.
+ */
+
+function linkToSelectionButton(){
 
     const taskInfo = document.querySelectorAll(".task");
 
     taskInfo.forEach(div => {
         div.addEventListener("click", () => {
             // Obter o valor do atributo de dados específico dessa div
-            const id = div.getAttribute("id");
+            currentID = div.getAttribute("id");
             
             sendDataToFormsOnClick( div.getAttribute("nome"),
                                     div.getAttribute("description"),
@@ -119,6 +190,10 @@ function linkToCopy(){
       });
 
 }
+
+/**
+ * ENVIA DADOS DA TASK PARA O FORMS.
+ */
 
 function sendDataToFormsOnClick(
                                 nome,
@@ -134,6 +209,48 @@ function sendDataToFormsOnClick(
     prioridade_task.value   = prioridade;
     categoria_task.value    = categoria;
     description_task.value  = description;
+
+}
+
+document.getElementById("delete-task").onclick = ()=>{
+
+    if(currentID){
+        ['todo','doing','done'].forEach(function(status, indice){
+            deleteTaskFromList(taskListDict[status])
+        });
+    }
+
+    deleteTaskFromHTML();
+
+    ['todo','doing','done'].forEach(function(status, indice){
+        console.log(taskListDict[status])
+    });
+
+}
+
+
+/**
+ * DELETA TASK DA RESPECTIVA STATUSLIST.
+ */
+function deleteTaskFromList(lista){
+
+    lista.forEach(function(task, indice) {
+        if (task.id == currentID){
+            lista.splice(indice, 1); 
+        }
+    });
+
+}
+
+/**
+ * DELETA TASK DO HTML
+ */
+
+function deleteTaskFromHTML(){
+    
+    const htmlTaskElement = document.getElementById(currentID);
+
+    htmlTaskElement.remove();
 
 }
 
