@@ -41,6 +41,18 @@ class Task {
     compare(taskA, taskB) {
         return taskB.prioridade - taskA.prioridade;
       }
+    
+    getAtributos(){
+        return [
+            this.id,
+            this.nome,
+            this.description,
+            this.dataLimite,
+            this.status,
+            this.prioridade,
+            this.categoria
+        ]
+    }
 
   
   }

@@ -5,15 +5,13 @@ class gsheetsDataBase{
         this.worksheetname = worksheetname
     }
 
-    getData() {
-        return fetch(this.gsheeturl+"?action=getdata"+"&wkname="+this.worksheetname)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Erro na solicitação: ' + response.status);
-            }
-            return response.json(); // Retorna o JSON da resposta
-          });
-      }
+    getData(){
+        var Httpreq = new XMLHttpRequest(); // a new request
+        Httpreq.open("GET",this.gsheeturl+"?action=getdata"+"&wkname="+this.worksheetname,false);
+        Httpreq.send(null);
+        return JSON.parse(Httpreq.responseText);          
+    }
+    
 
     appendData(data){
         fetch(this.gsheeturl+"?action=append&data="+data.join(",") + "&wkname="+this.worksheetname)
@@ -21,6 +19,10 @@ class gsheetsDataBase{
 
     deleteDataRow(row){
         fetch(this.gsheeturl+"?action=delete&data="+String(row)+"]&wkname="+this.worksheetname)
+    }
+
+    deleteAlldata(){
+        fetch(this.gsheeturl+"?action=deleteall&wkname="+this.worksheetname)
     }
 }
 

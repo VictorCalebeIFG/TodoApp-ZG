@@ -1,15 +1,5 @@
 import Task from './task.js';
-import gsheetsDataBase from './googleSheetsDataBase.js'
-
-const url = "https://script.google.com/macros/s/AKfycbwgEa8EfcuPaQvyrxcMmI8slFBBdDcmu3D5_wh9BFWMSoaGTupoykVqk7XjT9KszPXxow/exec"
-const sheetName = "folderdata"
-
-const dataBase = new gsheetsDataBase(url,sheetName)
-
-dataBase.getData().then(data => {
-    //console.log(data);
-  })
-
+import SaveAndLoad from './saveAndLoad.js';
 
 let nome_task               = document.getElementById('nome-task');
 let data_task               = document.getElementById('data-task');
@@ -65,13 +55,17 @@ function addTaskToList( nome,
                         categoria,
                         startID = false) {
     
-    
+    // Cria uma nova task
     const newTask = new Task(nome,description,dataLimite,status,prioridade,categoria);
+    
+    // Caso a task já tenha um ID, substitui o ID (utlizado para editar a task)
     if(startID ==true){newTask.id = currentID};
+    
+    // Adiciona a task na respectiva statuslist
+    pushToTaskListOnStatus(newTask);
 
-    checkStatusList(newTask);
-
-    addTasksToContainer();
+    // Adiciona o conteudo da task no arquivo html.
+    createHtmlTaskContent();
 
     return newTask
 
@@ -81,7 +75,7 @@ function addTaskToList( nome,
  * VERIFICAR QUAL DAS 3 STATUSLIST DEVE SER COLOCADO A TASK.
  */
 
-function checkStatusList(task){
+function pushToTaskListOnStatus(task){
     switch (status_task.value) {
         case "todo":
             todoList.push(task);
@@ -133,7 +127,7 @@ function getListOnStatus(){
 /**
  * ADICIONA OS ELEMENTOS HTML PARA CADA TASK
  */
-function addTasksToContainer(){
+function createHtmlTaskContent(){
 
     ['todo','done','doing'].forEach(status =>{
         // Limpando divs
@@ -161,13 +155,7 @@ function addTasksToContainer(){
         })
     
     })
-
-
-
-    
-
-
-    
+  
 
 }
 
@@ -178,7 +166,7 @@ function createTaskText(task){
 
     const text = `
     ID:         ${task.id}          <br>
-    Nome:       ${task.nome}        <br>Data:       ${task.getFormatedDate()} <br>
+    Nome:       ${task.nome}        <br>Data:       ${task.dataLimite} <br>
     Status:     ${task.status}      <br>Prioridade: ${task.prioridade} <br>
     categoria:  ${task.categoria}   <br>Descrição:  ${task.description} <br>
     `
@@ -241,8 +229,10 @@ function sendDataToFormsOnClick(
                                 prioridade,
                                 categoria) {
 
+    const data = new Date(dataLimite);
+
     nome_task.value         = nome;
-    data_task.value         = dataLimite;
+    data_task.value         = String(dataLimite).slice(0,dataLimite.length-5);
     status_task.value       = status;
     prioridade_task.value   = prioridade;
     categoria_task.value    = categoria;
@@ -306,5 +296,46 @@ function editTask(){
 
 }
 
+document.getElementById("save-task").onclick = save
+
+function save(){
+    const saveload = new SaveAndLoad();
+
+    document.getElementById("save-task").disabled = true
+    saveload.deleteAll()
+
+    setTimeout(function () {saveload.saveList(taskListDict['todo'])}, 1000);
+    setTimeout(function () {saveload.saveList(taskListDict['doing'])}, 1500);
+    setTimeout(function () {saveload.saveList(taskListDict['done'])}, 2000);
+    setTimeout(function () {document.getElementById("save-task").disabled = false}, 3000);
+
+    
+}
+
+document.getElementById("load-task").onclick = load
+
+function load(){
+    document.getElementById("load-task").disabled = true
+    const saveload = new SaveAndLoad();
+    
+    
+    
+    const data = saveload.getData()
+
+    todoList = data[0]
+    doingList = data[1]
+    doneList = data[2]
+
+    taskListDict['todo'] = todoList;
+    taskListDict['doing'] = doingList;
+    taskListDict['done'] = doneList;
+
+    createHtmlTaskContent();
+
+    document.getElementById("load-task").disabled = false
+
+
+
+}
 
 
