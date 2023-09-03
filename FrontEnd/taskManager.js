@@ -1,8 +1,15 @@
 import Task from './task.js';
+import gsheetsDataBase from './googleSheetsDataBase.js'
 
-const url = 'https://script.google.com/macros/s/AKfycbyr-ZWE6AaccOlVnX_2cIn6bsvEhoEcEo_zwEsjkS3uEfw-2eytpCWOuWqggsZ3wKODaQ/exec?action=getdata';
+const url = "https://script.google.com/macros/s/AKfycbwgEa8EfcuPaQvyrxcMmI8slFBBdDcmu3D5_wh9BFWMSoaGTupoykVqk7XjT9KszPXxow/exec"
+const sheetName = "folderdata"
 
-testAPI()
+const dataBase = new gsheetsDataBase(url,sheetName)
+
+dataBase.getData().then(data => {
+    //console.log(data);
+  })
+
 
 let nome_task               = document.getElementById('nome-task');
 let data_task               = document.getElementById('data-task');
@@ -33,13 +40,17 @@ const taskContainerDivs = {
 /*
 *ON CLICK DO BOTÃO "ADD" - É AQUI QUE SERÁ ADICIONADO A TASK NA RESPECTIVA LISTA (DE ACORDO COM STATUS)
 */
-document.getElementById("add-task").onclick = ()=>{
-    addTaskToList(  nome_task.value,
-                    description_task.value,
-                    data_task.value,
-                    status_task.value,
-                    prioridade_task.value,
-                    categoria_task.value);
+document.getElementById("add-task").onclick = addTask
+
+function addTask(startID=false){
+    addTaskToList(
+        nome_task.value,
+        description_task.value,
+        data_task.value,
+        status_task.value,
+        prioridade_task.value,
+        categoria_task.value,
+        startID = startID);
 }
 
 /**
@@ -51,14 +62,18 @@ function addTaskToList( nome,
                         dataLimite,
                         status,
                         prioridade,
-                        categoria) {
+                        categoria,
+                        startID = false) {
     
     
     const newTask = new Task(nome,description,dataLimite,status,prioridade,categoria);
-    
+    if(startID ==true){newTask.id = currentID};
+
     checkStatusList(newTask);
 
     addTasksToContainer();
+
+    return newTask
 
   }
 
@@ -70,12 +85,15 @@ function checkStatusList(task){
     switch (status_task.value) {
         case "todo":
             todoList.push(task);
+            todoList.sort((taks1,task2) => task2.prioridade - taks1.prioridade)
             break;
         case "doing":
             doingList.push(task);
+            doingList.sort((taks1,task2) => task2.prioridade - taks1.prioridade)
             break;
         default:
             doneList.push(task);
+            doneList.sort((taks1,task2) => task2.prioridade - taks1.prioridade)
       }  
 }
 
@@ -117,23 +135,39 @@ function getListOnStatus(){
  */
 function addTasksToContainer(){
 
-    const taskContent  = document.createElement("div");
-    taskContent.classList.add("task");
-
-    const button            = document.createElement('button');
-    button.textContent      = "Selecionar"
-
-    const task = getLastTaskOnListStatus();
-    taskContent.innerHTML = createTaskText(task);
+    ['todo','done','doing'].forEach(status =>{
+        // Limpando divs
+        taskContainerDivs[status].innerHTML = '';
     
-    setVariablesInDiv(taskContent,task);
+        taskListDict[status].forEach(task =>{
 
-    const div = taskContainerDivs[status_task.value];
+            const taskContent  = document.createElement("div");
+            taskContent.classList.add("task");
+    
+            const button            = document.createElement('button');
+            button.textContent      = "Selecionar"
+    
+            taskContent.innerHTML = createTaskText(task);
+            setVariablesInDiv(taskContent,task);
+    
+            const div = taskContainerDivs[status];
+    
+            div.appendChild(taskContent);
+    
+            taskContent.appendChild(button)
+    
+            linkToSelectionButton();
+    
+        })
+    
+    })
 
-    div.appendChild(taskContent);
-    taskContent.appendChild(button)
 
-    linkToSelectionButton();
+
+    
+
+
+    
 
 }
 
@@ -220,7 +254,9 @@ function sendDataToFormsOnClick(
  * BOTÃO DELETAR TASK
  */
 
-document.getElementById("delete-task").onclick = ()=>{
+document.getElementById("delete-task").onclick = deleteTask
+
+function deleteTask(){
 
     if(currentID){
         ['todo','doing','done'].forEach(function(status, indice){
@@ -262,19 +298,13 @@ function deleteTaskFromHTML(){
 
 }
 
-function testAPI(){
-    fetch(url).then(response => {
-        if (!response.ok) {
-            throw new Error('Erro na solicitação: ' + response.status);
-        }
-    return response.json();
-    })
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-    });
+document.getElementById("edit-task").onclick = editTask
+
+function editTask(){
+    deleteTask()
+    addTask(true)
 
 }
+
+
 

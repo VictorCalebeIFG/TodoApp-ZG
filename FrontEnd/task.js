@@ -38,11 +38,15 @@ class Task {
         return `${dia}/${mes}/${ano} ~ ${hora}:${minutos}`;
     }
 
+    compare(taskA, taskB) {
+        return taskB.prioridade - taskA.prioridade;
+      }
+
   
   }
 
   export default Task;
 
-  
+
 
   
