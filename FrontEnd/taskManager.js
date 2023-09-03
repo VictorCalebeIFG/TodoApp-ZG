@@ -1,5 +1,9 @@
 import Task from './task.js';
 
+const url = 'https://script.google.com/macros/s/AKfycbyr-ZWE6AaccOlVnX_2cIn6bsvEhoEcEo_zwEsjkS3uEfw-2eytpCWOuWqggsZ3wKODaQ/exec?action=getdata';
+
+testAPI()
+
 let nome_task               = document.getElementById('nome-task');
 let data_task               = document.getElementById('data-task');
 let status_task             = document.getElementById('estado-task');
@@ -212,6 +216,10 @@ function sendDataToFormsOnClick(
 
 }
 
+/**
+ * BOTÃO DELETAR TASK
+ */
+
 document.getElementById("delete-task").onclick = ()=>{
 
     if(currentID){
@@ -251,6 +259,22 @@ function deleteTaskFromHTML(){
     const htmlTaskElement = document.getElementById(currentID);
 
     htmlTaskElement.remove();
+
+}
+
+function testAPI(){
+    fetch(url).then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na solicitação: ' + response.status);
+        }
+    return response.json();
+    })
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
 
 }
 
