@@ -165,10 +165,12 @@ function createHtmlTaskContent(){
 function createTaskText(task){
 
     const text = `
+    <div class="content">
     ID:         ${task.id}          <br>
     Nome:       ${task.nome}        <br>Data:       ${task.dataLimite} <br>
     Status:     ${task.status}      <br>Prioridade: ${task.prioridade} <br>
     categoria:  ${task.categoria}   <br>Descrição:  ${task.description} <br>
+    </div>
     `
 
     return text
