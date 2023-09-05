@@ -91,38 +91,6 @@ function pushToTaskListOnStatus(task){
       }  
 }
 
-/**
- * RETORNA ULTIMA TASK DA RESPECTIVA STATUSLIST.
- */
-
-function getLastTaskOnListStatus(){
-    switch (status_task.value) {
-        case "todo":
-            return todoList[todoList.length -1];
-        case "doing":
-            return doingList[doingList.length -1];
-        default:
-            return doneList[doneList.length -1];
-      }  
-
-}
-
-/**
- * RETORNA A LISTA DA RESPECTIVA STATUSLIST.
- */
-
-function getListOnStatus(){
-
-    switch (status_task.value) {
-        case "todo":
-            return todoList;
-        case "doing":
-            return doingList;
-        default:
-            return doneList;
-      }  
-
-}
 
 /**
  * ADICIONA OS ELEMENTOS HTML PARA CADA TASK
@@ -166,10 +134,18 @@ function createTaskText(task){
 
     const text = `
     <div class="content">
-    ID:         ${task.id}          <br>
-    Nome:       ${task.nome}        <br>Data:       ${task.dataLimite} <br>
-    Status:     ${task.status}      <br>Prioridade: ${task.prioridade} <br>
-    categoria:  ${task.categoria}   <br>Descrição:  ${task.description} <br>
+        ID:         ${task.id}          <br>
+        Nome:       ${task.nome}        <br>Data:       ${task.dataLimite} <br>
+        Status:     ${task.status}      <br>Prioridade: ${task.prioridade} <br>
+        categoria:  ${task.categoria}   <br>
+        <div class = 'task-desc'>
+        <label>
+        Descrição:
+        
+        ${task.description}
+        </label>
+            
+        </div>
     </div>
     `
 
@@ -234,7 +210,7 @@ function sendDataToFormsOnClick(
     const data = new Date(dataLimite);
 
     nome_task.value         = nome;
-    data_task.value         = String(dataLimite).slice(0,dataLimite.length-5);
+    data_task.value         = String(dataLimite);
     status_task.value       = status;
     prioridade_task.value   = prioridade;
     categoria_task.value    = categoria;
@@ -306,12 +282,12 @@ function save(){
     document.getElementById("save-task").disabled = true
     saveload.deleteAll()
 
-    setTimeout(function () {saveload.saveList(taskListDict['todo'])}, 1000);
-    setTimeout(function () {saveload.saveList(taskListDict['doing'])}, 1500);
-    setTimeout(function () {saveload.saveList(taskListDict['done'])}, 2000);
+    const allTask = taskListDict['todo'].concat(taskListDict['doing'],taskListDict['done'])
+
+    setTimeout(function () {saveload.saveList(allTask)}, 1000);
+
     setTimeout(function () {document.getElementById("save-task").disabled = false}, 3000);
 
-    
 }
 
 document.getElementById("load-task").onclick = load
@@ -321,22 +297,28 @@ function load(){
     const saveload = new SaveAndLoad();
     
     
+    try {
+        const data = saveload.getData()
+
+        todoList = data[0]
+        doingList = data[1]
+        doneList = data[2]
+
+        taskListDict['todo'] = todoList;
+        taskListDict['doing'] = doingList;
+        taskListDict['done'] = doneList;
+
+        createHtmlTaskContent();
+
+        alert("Data Loaded !")
+        
+        
+    } catch (error) {
+        alert("Data Not Found !")
+    }
     
-    const data = saveload.getData()
-
-    todoList = data[0]
-    doingList = data[1]
-    doneList = data[2]
-
-    taskListDict['todo'] = todoList;
-    taskListDict['doing'] = doingList;
-    taskListDict['done'] = doneList;
-
-    createHtmlTaskContent();
 
     document.getElementById("load-task").disabled = false
-
-
 
 }
 

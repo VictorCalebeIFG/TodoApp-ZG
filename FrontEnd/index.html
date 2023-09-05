@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do app - AceleraZG</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="task-insertion">
@@ -12,17 +13,17 @@
         <div class="no-desc-container">
 
             <div class="nome-task">
-                <label for="nome-task">Digite o nome da task:</label><br>
+                <label for="nome-task"> <i class="fas fa-tasks"></i>__Nome da task</label><br>
                 <input type="text" name="nome-taks" id="nome-task">
             </div>
     
             <div class="data-task">
-                <label for="data-task">Data limite</label><br>
+                <label for="data-task"><i class="far fa-calendar-alt"></i>__Data limite</label><br>
                 <input type="datetime-local" name="data-task" id="data-task">
             </div>
     
             <div class="estado-task">
-                <label for="estado">Estado:</label><br>
+                <label for="estado"><i class="fas fa-info-circle"></i>__Estado</label><br>
                 <select name="estado-task" id="estado-task">
                     <option value="todo">todo</option>
                     <option value="doing">doing</option>
@@ -31,7 +32,7 @@
             </div>
             
             <div class="prioridade-task">
-                <label for="prioridade-task">Prioridade:</label><br>
+                <label for="prioridade-task"><i class="fas fa-exclamation-triangle"></i>__Prioridade</label><br>
                 <select name="prioridade-task" id="prioridade-task">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -42,7 +43,7 @@
             </div>
     
             <div class="categoria-task">
-                <label for="categoria-task">Categoria:</label><br>
+                <label for="categoria-task"><i class="fas fa-tags"></i>__Categoria</label><br>
                 <select name="categoria-task" id="categoria-task">
                     <option value="trabalho">trabalho</option>
                     <option value="saude">saude</option>
@@ -76,7 +77,7 @@
         <div class="todo-container">
 
             <div class="title-task-content">
-                To do
+                To do 📝
             </div>
 
             <div class="content todo" id="content-todo">
@@ -89,7 +90,7 @@
         <div class="doing-container">
 
             <div class="title-task-content">
-                Doing
+                Doing 🏃
             </div>
 
             <div class="content doing" id="content-doing">
@@ -103,7 +104,7 @@
         <div class="done-container">
 
             <div class="title-task-content">
-                Done
+                Done 🏆
             </div>
 
             <div class="content done" id="content-done">
